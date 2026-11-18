@@ -150,7 +150,7 @@ fun DgcBeatsApp() {
 
 @Composable fun NowPlayingCard(track: Track, playing: Boolean, onPlay: () -> Unit, onLyrics: () -> Unit, onArtwork: () -> Unit, artwork: String?, onNext: () -> Unit, onPrevious: () -> Unit) {
     val transition = rememberInfiniteTransition(label = "visualizer")
-    val bars = (0..19).map { i -> transition.animateFloat(0.18f, 0.35f + (i % 5) * 0.12f, infiniteRepeatable(tween(420 + i * 23), RepeatMode.Reverse), label = "bar$i") }
+      val bars = (0..19).map { index -> transition.animateFloat(initialValue = 0.18f, targetValue = 0.35f + (index % 5) * 0.12f, animationSpec = infiniteRepeatable<Float>(animation = tween<Float>(durationMillis = 420 + index * 23), repeatMode = RepeatMode.Reverse), label = "bar$index") }
     Card(Modifier.fillMaxWidth().padding(bottom = 18.dp), shape = RoundedCornerShape(22.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF171A20))) {
         Column(Modifier.padding(16.dp)) {
             Text("NOW PLAYING", color = Color.Gray, fontSize = 10.sp, letterSpacing = 2.sp)
